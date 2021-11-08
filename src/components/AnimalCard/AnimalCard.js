@@ -4,23 +4,22 @@ import AnimalDetails from '../AnimalDetails/AnimalDetails';
 import './AnimalCard.css';
 
 const AnimalCard = ({
-    diet,
     name,
-    size
+    size,
+    ...props
 }) => {
     return (
         <div className='animal-wrapper'>
             <h2>{name}</h2>
             <div>{size}kg</div>
             <AnimalDetails 
-                diet={diet}
+               {...props}
             />
         </div>
     );
 }
 
 AnimalCard.propTypes = {
-    diet: PropTypes.arrayOf(PropTypes.string).isRequired,
     name: PropTypes.string.isRequired,
     size: PropTypes.number.isRequired,
 }
