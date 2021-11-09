@@ -1,33 +1,25 @@
 import React from 'react';
-import data from './data';
-import AnimalCard from '../AnimalCard/AnimalCard';
-import './App.css';
+import { createUseStyles } from 'react-jss';
 
-function showAdditional(additional) {
-  const alertInformation = Object.entries(additional)
-    .map(information => `${information[0]}: ${information[1]}`)
-    .join('\n');
-    alert(alertInformation)
-} 
+import Alert from '../Alert/Alert';
+import CartSuccess from '../CartSuccess/CartSuccess';
+
+const useStyles = createUseStyles({
+  wrapper: {
+    padding: 20,
+   }
+});
 
 function App() {
- 
+  const classes = useStyles();
   return(
-    <div className='wrapper'>
-      <h1>Animals</h1>
-      {data.map(animal => (
-        <AnimalCard 
-          additional={animal.addtion}
-          diet={animal.diet}
-          key={animal.name} 
-          name={animal.name}
-          scientificName={animal.scientificName}
-          showAdditional={showAdditional}
-          size={animal.size}
-        />
-      ))}
+    <div className={classes.wrapper}>
+       <Alert title='Items Not Added' type='error'>
+         <div>Your items are out of stock.</div>
+       </Alert>
+       <CartSuccess />
     </div>
-  )
+  );  
 }
 
 export default App;

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Card from '../Card/Card';
 import AnimalDetails from '../AnimalDetails/AnimalDetails';
 import './AnimalCard.css';
 
@@ -9,25 +10,23 @@ const AnimalCard = ({
     ...props
 }) => {
     return (
-        <div className='animal-wrapper'>
-            <h2>{name}</h2>
-            <div>{size}kg</div>
-            <AnimalDetails 
-               {...props}
-            />
-        </div>
+       <Card 
+        title='Animal' 
+        details={
+            <AnimalDetails
+                {...props}    
+        />
+       }
+       >
+        <h3>{name}</h3>
+        <div>{size}kg</div>
+       </Card>
     );
 }
 
 AnimalCard.propTypes = {
     name: PropTypes.string.isRequired,
     size: PropTypes.number.isRequired,
-}
-
-AnimalCard.defaultProps = {
-    additional: {
-        notes: 'No Additonal Information'
-    }
 }
 
 export default AnimalCard;
