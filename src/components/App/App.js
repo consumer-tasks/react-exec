@@ -3,6 +3,7 @@ import { createUseStyles } from 'react-jss';
 
 import Alert from '../Alert/Alert';
 import CartSuccess from '../CartSuccess/CartSuccess';
+import Product from '../Product/Product';
 
 const useStyles = createUseStyles({
   wrapper: {
@@ -18,6 +19,7 @@ function App() {
          <div>Your items are out of stock.</div>
        </Alert>
        <CartSuccess />
+       <Product />
     </div>
   );  
 }
