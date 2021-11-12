@@ -1,28 +1,23 @@
 import React from 'react';
-import { createUseStyles } from 'react-jss';
 
-import Alert from '../Alert/Alert';
-import CartSuccess from '../CartSuccess/CartSuccess';
-// import Product from '../Product/Product';
 import Navigation from '../Navigation/Navigation';
+import SaladMaker from '../SaladMaker/SaladMaker';
+import UserContext from '../User/User';
 
-const useStyles = createUseStyles({
-  wrapper: {
-    padding: 20,
-   }
-});
+const user = {
+  name: 'Michael',
+  favorites: [
+    'avocado',
+    'carrot'
+  ]
+}
 
 function App() {
-  const classes = useStyles();
   return(
-    <div className={classes.wrapper}>
-       {/* <Alert title='Items Not Added' type='error'>
-         <div>Your items are out of stock.</div>
-       </Alert>
-       <CartSuccess /> */}
-       {/* <Product /> */}
+    <UserContext.Provider value={user}>
        <Navigation />
-    </div>
+       <SaladMaker />
+    </UserContext.Provider>
   );  
 }
 
