@@ -3,7 +3,8 @@ import { createUseStyles } from 'react-jss';
 
 import Alert from '../Alert/Alert';
 import CartSuccess from '../CartSuccess/CartSuccess';
-import Product from '../Product/Product';
+// import Product from '../Product/Product';
+import Navigation from '../Navigation/Navigation';
 
 const useStyles = createUseStyles({
   wrapper: {
@@ -15,11 +16,12 @@ function App() {
   const classes = useStyles();
   return(
     <div className={classes.wrapper}>
-       <Alert title='Items Not Added' type='error'>
+       {/* <Alert title='Items Not Added' type='error'>
          <div>Your items are out of stock.</div>
        </Alert>
-       <CartSuccess />
-       <Product />
+       <CartSuccess /> */}
+       {/* <Product /> */}
+       <Navigation />
     </div>
   );  
 }
