@@ -8,6 +8,7 @@ import TextInformation from '../TextInformation/TextInformation';
 import CustomForm from '../CustomForm/CustomForm';
 import CustomForm2 from '../CustomForm2/CustomForm2';
 import CustomList from '../CustomList/CustomList';
+import SelectData from '../SelectData/SelectData';
 const RiverInformation = lazy(() => import('../RiverInformation/RiverInformation'));
 
 
@@ -34,6 +35,7 @@ function App() {
        <CustomForm />
        <CustomForm2 />
        <CustomList />
+       <SelectData />
        <div><button onClick={toggle}>Toggle Details</button></div>
        <button onClick={() => setRiver('nile')}>Nile</button>
        <button onClick={() => setRiver('amazon')}>Amazon</button>
