@@ -2,6 +2,14 @@ import React, { useReducer, useState } from 'react';
 import './CustomForm2.css';
 
 const formReducer = (state, event) => {
+    if(event.reset) {
+        return {
+            apple: '',
+            count: 0,
+            name: '',
+            'gift-wrap': false,
+        }
+    }
     return{
         ...state,
         [event.name]: event.value
@@ -9,7 +17,9 @@ const formReducer = (state, event) => {
 }
 
 const CustomForm2 = () => {
-    const [formData, setFormData] = useReducer(formReducer, {});
+    const [formData, setFormData] = useReducer(formReducer, {
+        count: 100,
+    });
     const [submitting, setSubmitting] = useState(false);
 
     const handleSubmit = event => {
@@ -18,13 +28,17 @@ const CustomForm2 = () => {
 
         setTimeout(() => {
             setSubmitting(false);
+            setFormData({
+                reset: false
+            })
         }, 3000)
     }
 
     const handleChange = event => {
+        const isCheckbox = event.target.type === 'checkbox';
         setFormData({
             name: event.target.name,
-            value: event.target.value,
+            value: isCheckbox ? event.target.checked : event.target.value, 
         });
     }
 
@@ -32,7 +46,7 @@ const CustomForm2 = () => {
         <div className='wrapper'>
             <h1>How About Them Apples</h1>
             {submitting && 
-                <div>You are submittin the following: 
+                <div>You are submitting the following: 
                     <ul>
                         {Object.entries(formData).map(([name, value]) => (
                             <li key={name}><strong>{name}</strong>: {value.toString()}</li>
@@ -41,16 +55,16 @@ const CustomForm2 = () => {
                 </div>
             }
             <form onSubmit={handleSubmit}>
-                <fieldset>
+                <fieldset disabled={submitting}>
                     <label>
                         <p>Name</p>
-                        <input name='name' onChange={handleChange}/>
+                        <input name='name' onChange={handleChange} value={formData.name}/>
                     </label>
                 </fieldset>
-                <fieldset>
+                <fieldset disabled={submitting}>
                     <label>
                         <p>Apples</p>
-                        <select name='apple' onChange={handleChange}>
+                        <select name='apple' onChange={handleChange} value={formData.apple}>
                             <option value=''>--Please choose an option--</option>
                             <option value='fuji'>Fuji</option>
                             <option value='jonathan'>Jonathan</option>
@@ -60,14 +74,19 @@ const CustomForm2 = () => {
 
                     <label>
                         <p>Count</p>
-                        <input type='number' name='count' onChange={handleChange} />
+                        <input type='number' name='count' onChange={handleChange} value={formData.count || ''}/>
                     </label>
                     <label>
                         <p>Gift Wrap</p>
-                        <input type='checkbox' name='gift-wrap' onChange={handleChange}/>
+                        <input 
+                        type='checkbox' 
+                        name='gift-wrap' 
+                        onChange={handleChange} 
+                        checked={formData['gift-wrap'] || false}
+                        disabled={formData.apple !== 'fuji'}/>
                     </label>
                 </fieldset>
-                <button type='submit'>Submit</button>
+                <button type='submit' disabled={submitting}>Submit</button>
             </form>
         </div>
     );
